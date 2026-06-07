@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VentasPro Agencia: Consultoria B2B para escalar tus ventas en 90 dias.">
     <title>VentasPro | Multiplica tus ingresos</title>
     <style>
         :root { --primary-color: #0d47a1; --secondary-color: #ff6d00; --bg-light: #f5f7fa; --text-dark: #333333; --text-light: #ffffff; --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; --spacing-md: 2rem; --border-radius: 8px; }
@@ -89,7 +90,13 @@
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(emailInput.value)) { emailError.style.display = 'block'; } else { emailError.style.display = 'none'; alert('Datos enviados'); form.reset(); }
+                if (!emailRegex.test(emailInput.value)) { 
+                    emailError.style.display = 'block'; 
+                } else { 
+                    emailError.style.display = 'none'; 
+                    alert('Gracias. Un consultor se comunicara contigo pronto.'); 
+                    form.reset(); 
+                }
             });
         });
     </script>
