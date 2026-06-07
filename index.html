@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VentasPro | Multiplica tus ingresos</title>
+    <style>
+        :root {
+            --primary-color: #0d47a1; 
+            --secondary-color: #ff6d00; 
+            --bg-light: #f5f7fa;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --spacing-md: 2rem;
+            --border-radius: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-light);
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1976d2 100%);
+            color: var(--text-light);
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+
+        .btn-cta {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: var(--border-radius);
+            display: inline-block;
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .seccion { padding: 4rem 5%; text-align: center; }
+
+        .grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 300px;
+            text-align: left;
+        }
+
+        .contacto {
+            background-color: white;
+            max-width: 600px;
+            margin: 0 auto 4rem auto;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+        }
+
+        .form-group { margin-bottom: 1.5rem; text-align: left; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+        .form-group input { width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 4px; }
+        .error-msg { color: red; font-size: 0.85rem; display: none; margin-top: 0.3rem; }
+
+        footer { background-color: var(--text-dark); color: var(--text-light); text-align: center; padding: 2rem; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            header { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>📈 VentasPro</h2>
+        <nav><p>Consultoría B2B Especializada</p></nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Escala las ventas de tu empresa en 90 días</h1>
+            <p>Auditoría de procesos comerciales, entrenamiento de equipos y automatización de leads.</p>
+            <a href="#contacto" class="btn-cta">Agendar Auditoría Gratuita</a>
+        </section>
+
+        <section class="seccion">
+            <h2>Casos de Éxito</h2>
+            <div class="grid-container">
+                <article class="card">
+                    <p>"Desde que implementamos el sistema de VentasPro, nuestra tasa de cierre aumentó un 45%."</p><br>
+                    <strong>- Laura M., Directora Comercial</strong>
+                </article>
+                <article class="card">
+                    <p>"Organizaron nuestro embudo de ventas y entrenaron a nuestros vendedores."</p><br>
+                    <strong>- Carlos R., CEO</strong>
+                </article>
+            </div>
+        </section>
+
+        <section id="contacto" class="seccion">
+            <h2>Hablemos de tu crecimiento</h2>
+            <p>Déjanos tus datos y un consultor te contactará.</p>
+            <div class="contacto">
+                <form id="leadForm">
+                    <div class="form-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" id="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" id="email" required>
+                        <span class="error-msg" id="emailError">Correo inválido.</span>
+                    </div>
+                    <button type="submit" class="btn-cta" style="width: 100%;">Solicitar Asesoría</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 VentasPro. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('leadForm');
+            const emailInput = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailInput.value)) {
+                    emailError.style.display = 'block';
+                } else {
+                    emailError.style.display = 'none';
+                    alert('¡Datos enviados!');
+                    form.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
