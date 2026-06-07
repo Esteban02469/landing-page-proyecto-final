@@ -27,20 +27,21 @@
 </head>
 <body>
     <header>
-        <h2>🚀 VentasPro Agencia</h2>
-        <nav><p>Consultoría B2B Especializada</p></nav>
+        <h2>VentasPro Agencia</h2>
+        <nav><p>Consultoria B2B Especializada</p></nav>
     </header>
     <main>
         <section class="hero">
-            <h1>Escala las ventas de tu empresa en 90 días</h1>
-            <p>Auditoría de procesos comerciales, entrenamiento de equipos y automatización de leads.</p>
-            <a href="#contacto" class="btn-cta">Agendar Auditoría Gratuita</a>
+            <h1>Escala las ventas de tu empresa en 90 dias</h1>
+            <p>Auditoria de procesos comerciales, entrenamiento de equipos y automatizacion de leads.</p>
+            <a href="#contacto" class="btn-cta">Agendar Auditoria Gratuita</a>
+            <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">Empresas que confian en nosotros: TechCorp, MegaVentas, Invoicer</p>
         </section>
         <section class="seccion">
-            <h2>Casos de Éxito</h2>
+            <h2>Casos de Exito</h2>
             <div class="grid-container">
                 <article class="card">
-                    <p>"Desde que implementamos el sistema de VentasPro, nuestra tasa de cierre aumentó un 45%."</p><br>
+                    <p>"Desde que implementamos el sistema de VentasPro, nuestra tasa de cierre aumento un 45%."</p><br>
                     <strong>- Laura M., Directora Comercial</strong>
                 </article>
                 <article class="card">
@@ -55,7 +56,7 @@
         </section>
         <section id="contacto" class="seccion">
             <h2>Hablemos de tu crecimiento</h2>
-            <p>Déjanos tus datos y un consultor te contactará.</p>
+            <p>Dejanos tus datos y un consultor te contactara.</p>
             <div class="contacto">
                 <form id="leadForm">
                     <div class="form-group">
@@ -63,15 +64,15 @@
                         <input type="text" id="nombre" required>
                     </div>
                     <div class="form-group">
-                        <label>Correo Electrónico</label>
+                        <label>Correo Electronico</label>
                         <input type="email" id="email" required>
-                        <span class="error-msg" id="emailError">Correo inválido.</span>
+                        <span class="error-msg" id="emailError">Correo invalido.</span>
                     </div>
                     <div class="form-group">
-                        <label>Teléfono (Opcional)</label>
+                        <label>Telefono (Opcional)</label>
                         <input type="tel" id="telefono">
                     </div>
-                    <button type="submit" class="btn-cta" style="width: 100%;">Solicitar Asesoría</button>
+                    <button type="submit" class="btn-cta" style="width: 100%;">Solicitar Asesoria</button>
                 </form>
             </div>
         </section>
@@ -87,7 +88,7 @@
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(emailInput.value)) { emailError.style.display = 'block'; } else { emailError.style.display = 'none'; alert('¡Datos enviados!'); form.reset(); }
+                if (!emailRegex.test(emailInput.value)) { emailError.style.display = 'block'; } else { emailError.style.display = 'none'; alert('Datos enviados'); form.reset(); }
             });
         });
     </script>
