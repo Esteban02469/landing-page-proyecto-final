@@ -579,7 +579,7 @@
 
                     <h2>Agendar Auditoría Especializada</h2>
                     <p class="subtitulo-seccion">Elige uno de nuestros servicios técnicos avanzados para agendar una sesión personalizada con nuestros consultores.</p>
-                    
+                     
                     <div class="agenda-grid">
                         <div class="expert-card">
                             <div>
@@ -639,7 +639,7 @@
 
         <aside class="container">
             <div class="aviso-lateral">
-                <h4>Nota de Disponibilidad Técnica</h4>
+                <h4>Nota de Disponibilidad Técnico</h4>
                 <p>Las sesiones de auditoría comercial privada están sujetas a la verificación previa del perfil y el volumen de facturación de la empresa aplicante.</p>
             </div>
         </aside>
@@ -653,7 +653,7 @@
                     <p>Agencia especializada en el desarrollo, optimización y aceleración de infraestructura comercial B2B para mercados internacionales.</p>
                 </div>
                 <div class="footer-col">
-                    <h4>Enlaces Rápidos</h4>
+                    <h4>Enlaces Rápido</h4>
                     <ul>
                         <li><a href="#beneficios" style="color:#aaa; text-decoration:none;">Beneficios</a></li>
                         <li><a href="#caracteristicas" style="color:#aaa; text-decoration:none;">Características</a></li>
@@ -724,11 +724,12 @@
                         });
                     });
 
-                    this.regNombre.addEventListener('input', () => document.getElementById('errorNombre').style.display = 'none');
-                    this.regEmail.addEventListener('input', () => document.getElementById('errorEmail').style.display = 'none');
-                    this.regTelefono.addEventListener('input', () => document.getElementById('errorTelefono').style.display = 'none');
-                    this.appDate.addEventListener('input', () => document.getElementById('errorDate').style.display = 'none');
-                    this.appTime.addEventListener('input', () => document.getElementById('errorTime').style.display = 'none');
+                    // Limpieza de errores condicionales súper segura para evitar que explote si no existen en pantalla
+                    if (this.regNombre) this.regNombre.addEventListener('input', () => { const err = document.getElementById('errorNombre'); if(err) err.style.display = 'none'; });
+                    if (this.regEmail) this.regEmail.addEventListener('input', () => { const err = document.getElementById('errorEmail'); if(err) err.style.display = 'none'; });
+                    if (this.regTelefono) this.regTelefono.addEventListener('input', () => { const err = document.getElementById('errorTelefono'); if(err) err.style.display = 'none'; });
+                    if (this.appDate) this.appDate.addEventListener('input', () => { const err = document.getElementById('errorDate'); if(err) err.style.display = 'none'; });
+                    if (this.appTime) this.appTime.addEventListener('input', () => { const err = document.getElementById('errorTime'); if(err) err.style.display = 'none'; });
                 },
 
                 checkExistingSession: function() {
@@ -743,18 +744,21 @@
                     let isValid = true;
 
                     if (this.regNombre.value.trim().length < 3) {
-                        document.getElementById('errorNombre').style.display = 'block';
+                        const err = document.getElementById('errorNombre');
+                        if(err) err.style.display = 'block';
                         isValid = false;
                     }
 
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                     if (!emailRegex.test(this.regEmail.value.trim())) {
-                        document.getElementById('errorEmail').style.display = 'block';
+                        const err = document.getElementById('errorEmail');
+                        if(err) err.style.display = 'block';
                         isValid = false;
                     }
 
                     if (this.regTelefono.value.trim().length < 7) {
-                        document.getElementById('errorTelefono').style.display = 'block';
+                        const err = document.getElementById('errorTelefono');
+                        if(err) err.style.display = 'block';
                         isValid = false;
                     }
 
@@ -802,8 +806,8 @@
                 },
 
                 showBookingForm: function(tema) {
-                    this.selectedTopicSpan.innerText = tema;
                     this.bookingContainer.style.display = 'block';
+                    this.selectedTopicSpan.innerText = tema;
                     this.bookingContainer.scrollIntoView({ behavior: 'smooth' });
                 },
 
@@ -817,12 +821,14 @@
                     let isValid = true;
 
                     if (!this.appDate.value) {
-                        document.getElementById('errorDate').style.display = 'block';
+                        const err = document.getElementById('errorDate');
+                        if(err) err.style.display = 'block';
                         isValid = false;
                     }
 
                     if (!this.appTime.value) {
-                        document.getElementById('errorTime').style.display = 'block';
+                        const err = document.getElementById('errorTime');
+                        if(err) err.style.display = 'block';
                         isValid = false;
                     }
 
@@ -834,53 +840,42 @@
                         hora: this.appTime.value
                     };
 
-                    let citas = JSON.parse(localStorage.getItem('vpro_session_citas')) || [];
+                    let citas = JSON.parse(localStorage.getItem('vpro_appointments')) || [];
                     citas.push(nuevaCita);
-                    localStorage.setItem('vpro_session_citas', JSON.stringify(citas));
+                    localStorage.setItem('vpro_appointments', JSON.stringify(citas));
 
-                    fetch('https://jsonplaceholder.typicode.com/posts', {
-                        method: 'POST',
-                        body: JSON.stringify({ appointment: nuevaCita }),
-                        headers: { 'Content-type': 'application/json; charset=UTF-8' }
-                    })
-                    .then(response => response.json())
-                    .then(() => {
-                        this.hideBookingForm();
-                        this.updateAppointmentsList();
-                    })
-                    .catch(() => {
-                        this.hideBookingForm();
-                        this.updateAppointmentsList();
-                    });
+                    this.hideBookingForm();
+                    this.updateAppointmentsList();
                 },
 
                 updateAppointmentsList: function() {
-                    const citas = JSON.parse(localStorage.getItem('vpro_session_citas')) || [];
+                    let citas = JSON.parse(localStorage.getItem('vpro_appointments')) || [];
                     
                     if (citas.length === 0) {
                         this.appointmentsList.innerHTML = '<p style="color:#777777;">No tienes auditorías agendadas actualmente.</p>';
                         return;
                     }
-                    
+
                     this.appointmentsList.innerHTML = '';
                     citas.forEach(cita => {
-                        const div = document.createElement('div');
-                        div.className = 'appointment-item';
-                        div.innerHTML = `
+                        const item = document.createElement('div');
+                        item.className = 'appointment-item';
+                        item.innerHTML = `
                             <div>
-                                <strong>Módulo: ${cita.tema}</strong><br>
-                                <small>Fecha: ${cita.fecha} | Hora: ${cita.hora}</small>
+                                <strong>${cita.tema}</strong>
+                                <p style="font-size:0.9rem; color:#555;">Fecha: ${cita.fecha} | Hora: ${cita.hora}</p>
                             </div>
-                            <span class="status-badge">Confirmado</span>
+                            <span class="status-badge">Confirmada</span>
                         `;
-                        this.appointmentsList.appendChild(div);
+                        this.appointmentsList.appendChild(item);
                     });
                 }
             };
 
-            window.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('DOMContentLoaded', () => {
                 VentasProApp.init();
             });
+
         })();
     </script>
 </body>
