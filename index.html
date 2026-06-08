@@ -35,7 +35,6 @@
         .form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
         .form-group input { width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
         
-        /* Contenedores de Vistas */
         .dashboard-container { max-width: 1000px; margin: 2rem auto; padding: 2rem; background: white; border-radius: var(--border-radius); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .user-profile { background: #e3f2fd; padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 2rem; text-align: left; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
         .agenda-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; text-align: left; }
@@ -110,7 +109,7 @@
             <div class="user-profile">
                 <div>
                     <h3>Bienvenido a tu Perfil, <span id="profileName">Usuario</span></h3>
-                    <p>📧 Correo: <span id="profileEmail">correo@enlace.com</span> | 📞 Tel: <span id="profilePhone">0000</span></p>
+                    <p>Correo: <span id="profileEmail">correo@enlace.com</span> | Tel: <span id="profilePhone">0000</span></p>
                 </div>
                 <button class="btn-secondary" onclick="cerrarSesion()">Cerrar Sesión</button>
             </div>
@@ -221,7 +220,7 @@
             </div>
 
             <div class="appointments-section">
-                <h3>🗓️ Tus Auditorias Agendadas (Persistencia en LocalStorage Activa)</h3>
+                <h3>Tus Auditorias Agendadas (Persistencia en LocalStorage Activa)</h3>
                 <br>
                 <div id="appointmentsList">
                     <p style="color:#777;">No tienes auditorias agendadas actualmente.</p>
@@ -235,7 +234,6 @@
     </footer>
 
     <script>
-        // Funciones de control global absoluto - Sin bloqueos de hilos de ejecucion
         function procesarRegistro(event) {
             event.preventDefault();
             
@@ -312,7 +310,7 @@
                 div.innerHTML = `
                     <div>
                         <strong>Especialidad: ${cita.tema}</strong><br>
-                        <small>📅 Fecha: ${cita.fecha} | ⏰ Hora: ${cita.hora}</small>
+                        <small>Fecha: ${cita.fecha} | Hora: ${cita.hora}</small>
                     </div>
                     <span style="background:#388e3c; color:white; padding:0.4rem 0.8rem; border-radius:4px; font-size:0.85rem; font-weight:bold;">Agendado</span>
                 `;
@@ -320,7 +318,6 @@
             });
         }
 
-        // Auto-login al recargar la pagina si el usuario ya existe en base de datos
         window.onload = function() {
             const usuarioGuardado = JSON.parse(localStorage.getItem('ventasPro_user'));
             if (usuarioGuardado) {
