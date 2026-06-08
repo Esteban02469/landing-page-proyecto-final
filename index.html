@@ -6,110 +6,283 @@
     <meta name="description" content="VentasPro Agencia: Consultoria B2B para escalar tus ventas en 90 dias.">
     <title>VentasPro | Multiplica tus ingresos</title>
     <style>
-        :root { --primary-color: #0d47a1; --secondary-color: #ff6d00; --bg-light: #f5f7fa; --text-dark: #333333; --text-light: #ffffff; --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; --spacing-md: 2rem; --border-radius: 8px; }
+        :root { 
+            --primary-color: #0d47a1; 
+            --secondary-color: #ff6d00; 
+            --bg-light: #f5f7fa; 
+            --text-dark: #333333; 
+            --text-light: #ffffff; 
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            --border-radius: 8px; 
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font-main); color: var(--text-dark); line-height: 1.6; background-color: var(--bg-light); }
         header { background-color: var(--primary-color); color: var(--text-light); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
+        
         .hero { text-align: center; padding: 5rem 5%; background: linear-gradient(135deg, var(--primary-color) 0%, #1976d2 100%); color: var(--text-light); }
         .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
-        .btn-cta { background-color: var(--secondary-color); color: var(--text-light); padding: 1rem 2rem; text-decoration: none; font-weight: bold; border-radius: var(--border-radius); display: inline-block; margin-top: 1rem; border: none; cursor: pointer; font-size: 1.1rem; transition: 0.3s; }
-        .btn-cta:hover { background-color: #e66000; transform: scale(1.05); }
+        
+        .btn-cta { background-color: var(--secondary-color); color: var(--text-light); padding: 1rem 2rem; text-decoration: none; font-weight: bold; border-radius: var(--border-radius); display: inline-block; margin-top: 1rem; border: none; cursor: pointer; font-size: 1.1rem; transition: 0.3s; text-align: center; }
+        .btn-cta:hover { background-color: #e66000; transform: scale(1.02); }
+        .btn-secondary { background-color: #555; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; }
+        
         .seccion { padding: 4rem 5%; text-align: center; }
         .grid-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 2rem; }
         .card { background-color: white; padding: 2rem; border-radius: var(--border-radius); box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 300px; text-align: left; }
-        .contacto { background-color: white; max-width: 600px; margin: 0 auto 4rem auto; padding: 2rem; border-radius: var(--border-radius); }
+        
+        .contacto { background-color: white; max-width: 600px; margin: 0 auto 4rem auto; padding: 2rem; border-radius: var(--border-radius); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .form-group { margin-bottom: 1.5rem; text-align: left; }
         .form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
-        .form-group input { width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 4px; }
+        .form-group input, .form-group select { width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
         .error-msg { color: red; font-size: 0.85rem; display: none; margin-top: 0.3rem; }
-        footer { background-color: var(--text-dark); color: var(--text-light); text-align: center; padding: 2rem; }
+        
+        .dashboard-container { max-width: 1000px; margin: 2rem auto; padding: 2rem; background: white; border-radius: var(--border-radius); box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: none; }
+        .user-profile { background: #e3f2fd; padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 2rem; text-align: left; display: flex; justify-content: space-between; align-items: center; }
+        .agenda-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; text-align: left; }
+        .expert-card { border: 1px solid #e0e0e0; padding: 1.5rem; border-radius: var(--border-radius); background: #fafafa; transition: 0.2s; }
+        .expert-card:hover { border-color: var(--primary-color); background: #fff; }
+        .expert-card h4 { color: var(--primary-color); margin-bottom: 0.5rem; }
+        .badge { background: #388e3c; color: white; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 0.5rem; }
+        
+        .appointments-section { margin-top: 3rem; text-align: left; }
+        .appointment-item { background: #f1f8e9; border-left: 5px solid #7cb342; padding: 1rem; margin-bottom: 1rem; border-radius: 0 4px 4px 0; display: flex; justify-content: space-between; align-items: center; }
+
+        footer { background-color: var(--text-dark); color: var(--text-light); text-align: center; padding: 2rem; margin-top: 4rem; }
         @media (max-width: 768px) { .hero h1 { font-size: 2rem; } header { flex-direction: column; gap: 1rem; text-align: center; } .grid-container { flex-direction: column; align-items: center; } }
     </style>
 </head>
 <body>
     <header>
         <h2>VentasPro Agencia</h2>
-        <nav><p>Consultoria B2B Especializada</p></nav>
+        <nav id="headerNav"><p>Consultoria B2B Especializada</p></nav>
     </header>
+    
     <main>
-        <section class="hero">
-            <h1>Escala las ventas de tu empresa en 90 dias</h1>
-            <p>Auditoria de procesos comerciales, entrenamiento de equipos y automatizacion de leads.</p>
-            <a href="#contacto" class="btn-cta">Agendar Auditoria Gratuita</a>
-            <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">Empresas que confian en nosotros: TechCorp, MegaVentas, Invoicer</p>
-        </section>
-        <section class="seccion">
-            <h2>Casos de Exito</h2>
-            <div class="grid-container">
-                <article class="card">
-                    <p>"Desde que implementamos el sistema de VentasPro, nuestra tasa de cierre aumento un 45%."</p><br>
-                    <strong>- Laura M., Directora Comercial</strong>
-                </article>
-                <article class="card">
-                    <p>"Organizaron nuestro embudo de ventas y entrenaron a nuestros vendedores."</p><br>
-                    <strong>- Carlos R., CEO</strong>
-                </article>
-                <article class="card">
-                    <p>"Excelente servicio, pasamos de 10 a 50 clientes en un solo mes."</p><br>
-                    <strong>- Sofia T., Emprendedora</strong>
-                </article>
+        <div id="publicView">
+            <section class="hero">
+                <h1>Escala las ventas de tu empresa en 90 dias</h1>
+                <p>Auditoria de procesos comerciales, entrenamiento de equipos y automatizacion de leads.</p>
+                <a href="#registroSeccion" class="btn-cta">Registrarse para Agendar</a>
+                <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">Empresas que confian en nosotros: TechCorp, MegaVentas, Invoicer</p>
+            </section>
+            
+            <section class="seccion">
+                <h2>Casos de Exito</h2>
+                <div class="grid-container">
+                    <article class="card">
+                        <p>"Desde que implementamos el sistema de VentasPro, nuestra tasa de cierre aumento un 45%."</p><br>
+                        <strong>- Laura M., Directora Comercial</strong>
+                    </article>
+                    <article class="card">
+                        <p>"Organizaron nuestro embudo de ventas y entrenaron a nuestros vendedores."</p><br>
+                        <strong>- Carlos R., CEO</strong>
+                    </article>
+                    <article class="card">
+                        <p>"Excelente servicio, pasamos de 10 a 50 clientes en un solo mes."</p><br>
+                        <strong>- Sofia T., Emprendedora</strong>
+                    </article>
+                </div>
+            </section>
+            
+            <section id="registroSeccion" class="seccion">
+                <h2>Crea tu cuenta de Consultoría</h2>
+                <p>Registrate de forma gratuita para acceder al panel de expertos y agendar tus auditorias lícitas.</p>
+                <div class="contacto">
+                    <form id="authForm">
+                        <div class="form-group">
+                            <label for="regNombre">Nombre Completo</label>
+                            <input type="text" id="regNombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="regEmail">Correo Electronico</label>
+                            <input type="email" id="regEmail" required>
+                            <span class="error-msg" id="emailError">Correo invalido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="regTelefono">Telefono de Contacto</label>
+                            <input type="tel" id="regTelefono" required>
+                        </div>
+                        <button type="submit" class="btn-cta" style="width: 100%;">Crear Cuenta y Entrar</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <div id="privateView" class="dashboard-container">
+            <div class="user-profile">
+                <div>
+                    <h3>Bienvenido a tu Perfil, <span id="profileName">Usuario</span></h3>
+                    <p>Correo: <span id="profileEmail">correo@enlace.com</span> | Tel: <span id="profilePhone">0000</span></p>
+                </div>
+                <button id="btnLogout" class="btn-secondary">Cerrar Sesión</button>
             </div>
-        </section>
-        <section id="contacto" class="seccion">
-            <h2>Hablemos de tu crecimiento</h2>
-            <p>Dejanos tus datos y un consultor te contactará.</p>
-            <div class="contacto">
-                <form id="leadForm">
+
+            <section style="text-align: center;">
+                <h2>Agendar Auditoría con un Experto</h2>
+                <p>Selecciona una de nuestras 10 especialidades comerciales para transformar tu empresa.</p>
+                
+                <div class="agenda-grid">
+                    <div class="expert-card">
+                        <span class="badge">Especialista Senior</span>
+                        <h4>Como administrar una empresa</h4>
+                        <p>Optimiza recursos, gestiona equipos de alto rendimiento y lidera con metodologia organizada.</p>
+                        <br>
+                        <button class="btn-cta" style="padding:0.5rem 1rem; font-size:0.9rem;" onclick="abrirAgendamiento('Como administrar una empresa')">Agendar</button>
+                    </div>
+                    <div class="expert-card">
+                        <span class="badge">Especialista Legal</span>
+                        <h4>Como tomar una desicion correcta en un acuerdo</h4>
+                        <p>Analisis de riesgos, clausulas criticas y estrategia de negociacion bajo presion.</p>
+                        <br>
+                        <button class="btn-cta" style="padding:0.5rem 1rem; font-size:0.9rem;" onclick="abrirAgendamiento('Como tomar una desicion correcta en un acuerdo')">Agendar</button>
+                    </div>
+                    <div class="expert-card">
+                        <span class="badge">Especialista Financiero</span>
+                        <h4>Estrategia de precios y aumento de margen</h4>
+                        <p>Estructura costos y aprende a cobrar lo que tu producto realmente vale sin perder clientes.</p>
+                        <br>
+                        <button class="btn-cta" style="padding:0.5rem 1rem; font-size:0.9rem;" onclick="abrirAgendamiento('Estrategia de precios y aumento de margen')">Agendar</button>
+                    </div>
+                    <div class="expert-card">
+                        <span class="badge">Especialista Tecnologico</span>
+                        <h4>Automatizacion de leads y embudos B2B</h4>
+                        <p>Implementa herramientas de software e Inteligencia Artificial para capturar clientes en automatico.</p>
+                        <br>
+                        <button class="btn-cta" style="padding:0.5rem 1rem; font-size:0.9rem;" onclick="abrirAgendamiento('Automatizacion de leads y embudos B2B')">Agendar</button>
+                    </div>
+                    <div class="expert-card">
+                        <span class="badge">Coach de Ventas</span>
+                        <h4>Entrenamiento de equipos comerciales</h4>
+                        <p>Tecnicas de manejo de objeciones, motivacion y cumplimiento de metas mensuales agressivas.</p>
+                        <br>
+                        <button class="btn-cta" style="padding:0.5rem 1rem; font-size:0.9rem;" onclick="abrirAgendamiento('Entrenamiento de equipos comerciales')">Agendar</button>
+                    </div>
+                    <div class="expert-card">
+                        <span class="badge">Consultor Growth</span>
+                        <h4>Escalamiento internacional de servicios</h4>
+                        <p>Como abrir operaciones licitas en otros paises de la region sin morir en el intento.</p>
+                        <br>
+                        <button class="btn-cta" style="padding:0.5rem 1rem; font-size:0.9rem;" onclick="abrirAgendamiento('Escalamiento internacional de servicios')">Agendar</button>
+                    </div>
+                    <div class="expert-card">
+                        <span class="badge">Especialista de Cierre</span>
+                        <h4>Tecnicas avanzadas de persuasion de alto valor</h4>
+                        <p>Aprende los gatillos mentales criticos para cerrar contratos con corporaciones grandes.</p>
+                        <br>
+                        <button class="btn-cta" style="padding:0.5rem 1rem; font-size:0.9rem;" onclick="abrirAgendamiento('Tecnicas avanzadas de persuasion de alto valor')">Agendar</button>
+                    </div>
+                    <div class="expert-card">
+                        <span class="badge">Consultor de Marca</span>
+                        <h4>Posicionamiento y autoridad de mercado</h4>
+                        <p>Convierte a tu empresa en el referente de tu nicho para que los clientes te busquen a ti.</p>
+                        <br>
+                        <button class="btn-cta" style="padding:0.5rem 1rem; font-size:0.9rem;" onclick="abrirAgendamiento('Posicionamiento y autoridad de mercado')">Agendar</button>
+                    </div>
+                    <div class="expert-card">
+                        <span class="badge">Especialista de Retencion</span>
+                        <h4>Fidelizacion de clientes y disminucion de Churn</h4>
+                        <p>Estrategias de exito del cliente (Customer Success) para mantener tus ingresos recurrentes.</p>
+                        <br>
+                        <button class="btn-cta" style="padding:0.5rem 1rem; font-size:0.9rem;" onclick="abrirAgendamiento('Fidelizacion de clientes y disminucion de Churn')">Agendar</button>
+                    </div>
+                    <div class="expert-card">
+                        <span class="badge">Director de Operaciones</span>
+                        <h4>Reingenieria de procesos internos</h4>
+                        <p>Elimina cuellos de botella en la entrega de tu servicio y duplica la eficiencia de tu personal.</p>
+                        <br>
+                        <button class="btn-cta" style="padding:0.5rem 1rem; font-size:0.9rem;" onclick="abrirAgendamiento('Reingenieria de procesos internos')">Agendar</button>
+                    </div>
+                </div>
+            </section>
+
+            <div id="bookingFormContainer" class="contacto" style="display:none; margin-top:3rem;">
+                <h3>Agendando: <span id="selectedTopic" style="color:var(--primary-color);">Tema</span></h3>
+                <br>
+                <form id="appointmentForm">
                     <div class="form-group">
-                        <label>Nombre Completo</label>
-                        <input type="text" id="nombre" required>
+                        <label>Selecciona la Fecha</label>
+                        <input type="date" id="appDate" required>
                     </div>
                     <div class="form-group">
-                        <label>Correo Electronico</label>
-                        <input type="email" id="email" required>
-                        <span class="error-msg" id="emailError">Correo invalido.</span>
+                        <label>Selecciona la Hora</label>
+                        <input type="time" id="appTime" required>
                     </div>
-                    <div class="form-group">
-                        <label>Telefono (Opcional)</label>
-                        <input type="tel" id="telefono">
-                    </div>
-                    <button type="submit" id="btnSubmit" class="btn-cta" style="width: 100%;">Solicitar Asesoria</button>
+                    <button type="submit" class="btn-cta" style="width: 100%;">Confirmar Agenda Técnico</button>
+                    <button type="button" class="btn-secondary" style="width: 100%; margin-top:0.5rem;" onclick="cancelarAgendamiento()">Cancelar</button>
                 </form>
             </div>
-        </section>
+
+            <div class="appointments-section">
+                <h3>Tus Auditorias Agendadas (Persistencia Local Activa)</h3>
+                <br>
+                <div id="appointmentsList">
+                    <p style="color:#777;">No tienes auditorias agendadas actualmente.</p>
+                </div>
+            </div>
+        </div>
     </main>
+
     <footer>
         <p>&copy; 2024 VentasPro. Todos los derechos reservados.</p>
         <p style="font-size: 0.8rem; margin-top: 0.5rem;"><a href="#" style="color: white;">Politica de Privacidad</a> | <a href="#" style="color: white;">Terminos de Servicio</a></p>
     </footer>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    <script>
+        // Funciones de control en ámbito global para que las llamadas inline funcionen correctamente
+        function abrirAgendamiento(tema) {
+            document.getElementById('selectedTopic').innerText = tema;
+            document.getElementById('bookingFormContainer').style.display = 'block';
+            document.getElementById('bookingFormContainer').scrollIntoView({ behavior: 'smooth' });
+        }
 
-        // Configuración de conexión del cliente con la base de datos Firebase Firestore
-        const firebaseConfig = {
-            apiKey: "AIzaSyAsFakeKey_UPTC_PSI_2026_Project",
-            authDomain: "ventaspro-agencia.firebaseapp.com",
-            projectId: "ventaspro-agencia",
-            storageBucket: "ventaspro-agencia.appspot.com",
-            messagingSenderId: "1234567890",
-            appId: "1:1234567890:web:abcdef123456"
-        };
+        function cancelarAgendamiento() {
+            document.getElementById('bookingFormContainer').style.display = 'none';
+        }
 
-        // Inicialización de los servicios de persistencia asíncrona
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        function renderAppointments() {
+            const listContainer = document.getElementById('appointmentsList');
+            const appointments = JSON.parse(localStorage.getItem('ventasPro_appointments')) || [];
+            
+            if (appointments.length === 0) {
+                listContainer.innerHTML = '<p style="color:#777;">No tienes auditorias agendadas actualmente.</p>';
+                return;
+            }
+            
+            listContainer.innerHTML = '';
+            appointments.forEach(app => {
+                const item = document.createElement('div');
+                item.className = 'appointment-item';
+                item.innerHTML = `
+                    <div>
+                        <strong>Tema: ${app.topic}</strong><br>
+                        <small>Fecha programada: ${app.date} | Hora: ${app.time}</small>
+                    </div>
+                    <span style="background:#7cb342; color:white; padding:0.3rem 0.6rem; border-radius:4px; font-size:0.85rem;">Confirmado</span>
+                `;
+                listContainer.appendChild(item);
+            });
+        }
 
+        // Lógica de autenticación y carga de la base de datos local
         document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('leadForm');
-            const emailInput = document.getElementById('email');
-            const nombreInput = document.getElementById('nombre');
-            const telefonoInput = document.getElementById('telefono');
+            const authForm = document.getElementById('authForm');
+            const publicView = document.getElementById('publicView');
+            const privateView = document.getElementById('privateView');
+            
+            const profileName = document.getElementById('profileName');
+            const profileEmail = document.getElementById('profileEmail');
+            const profilePhone = document.getElementById('profilePhone');
+            const btnLogout = document.getElementById('btnLogout');
+            
+            const emailInput = document.getElementById('regEmail');
             const emailError = document.getElementById('emailError');
-            const btnSubmit = document.getElementById('btnSubmit');
 
-            form.addEventListener('submit', async (e) => {
+            const activeUser = JSON.parse(localStorage.getItem('ventasPro_session'));
+            if (activeUser) {
+                cargarDashboard(activeUser);
+            }
+
+            authForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -117,32 +290,55 @@
                     emailError.style.display = 'block'; 
                     return;
                 }
-                
                 emailError.style.display = 'none';
+
+                const userData = {
+                    nombre: document.getElementById('regNombre').value.trim(),
+                    email: emailInput.value.trim(),
+                    telefono: document.getElementById('regTelefono').value.trim()
+                };
+
+                localStorage.setItem('ventasPro_session', JSON.stringify(userData));
+                cargarDashboard(userData);
+            });
+
+            function cargarDashboard(user) {
+                publicView.style.display = 'none';
+                privateView.style.display = 'block';
                 
-                // Cambiar estado visual del botón para evitar múltiples envíos concurrentes
-                btnSubmit.disabled = true;
-                btnSubmit.innerText = "Procesando registro...";
+                profileName.innerText = user.nombre;
+                profileEmail.innerText = user.email;
+                profilePhone.innerText = user.telefono;
+                
+                renderAppointments();
+            }
 
-                try {
-                    // Envío asíncrono y persistencia directa en la colección 'leads' de Firestore
-                    await addDoc(collection(db, "leads"), {
-                        nombre: nombreInput.value.trim(),
-                        email: emailInput.value.trim(),
-                        telefono: telefonoInput.value.trim(),
-                        fechaRegistro: serverTimestamp()
-                    });
+            btnLogout.addEventListener('click', () => {
+                localStorage.removeItem('ventasPro_session');
+                publicView.style.display = 'block';
+                privateView.style.display = 'none';
+                authForm.reset();
+            });
 
-                    alert('¡Datos guardados con éxito en la base de datos de la agencia!');
-                    form.reset();
-                } catch (error) {
-                    console.error("Error en la persistencia de datos: ", error);
-                    alert('Error técnico al conectar con la base de datos de persistencia.');
-                } finally {
-                    // Restaurar estado funcional del botón
-                    btnSubmit.disabled = false;
-                    btnSubmit.innerText = "Solicitar Asesoria";
-                }
+            const appointmentForm = document.getElementById('appointmentForm');
+            appointmentForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const topic = document.getElementById('selectedTopic').innerText;
+                const date = document.getElementById('appDate').value;
+                const time = document.getElementById('appTime').value;
+                
+                const newAppointment = { topic, date, time };
+                
+                let currentAppointments = JSON.parse(localStorage.getItem('ventasPro_appointments')) || [];
+                currentAppointments.push(newAppointment);
+                
+                localStorage.setItem('ventasPro_appointments', JSON.stringify(currentAppointments));
+                
+                alert('¡Auditoria agendada y guardada correctamente!');
+                document.getElementById('bookingFormContainer').style.display = 'none';
+                appointmentForm.reset();
+                renderAppointments();
             });
         });
     </script>
